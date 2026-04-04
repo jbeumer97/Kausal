@@ -1,0 +1,87 @@
+---
+const features = [
+  {
+    icon: "☕",
+    title: "Top Café & Takeaway",
+    desc: "Frischer Specialty Coffee, Kuchen & Snacks – zum Genießen hier oder für unterwegs (Essen zum Mitnehmen)."
+  },
+  {
+    icon: "☀️",
+    title: "Sonniger Außenbereich",
+    desc: "Dein Platz an der Sonne im Herzen von Flingern. Perfekt für den Nachmittagskaffee."
+  },
+  {
+    icon: "❄️",
+    title: "Klimatisiert",
+    desc: "Angenehme Temperaturen, auch wenn Düsseldorf schwitzt. Dein kühler Rückzugsort."
+  },
+  {
+    icon: "💻",
+    title: "Kostenloses WLAN",
+    desc: "Dein Co-Working-Space mit dem besten Kaffee der Stadt. Produktivität trifft Genuss."
+  },
+  {
+    icon: "🐾",
+    title: "Haustiere willkommen",
+    desc: "Bring deinen Vierbeiner mit – Wassernapf und Leckerli warten schon auf euch!"
+  },
+  {
+    icon: "🍸",
+    title: "Afterwork & Drinks",
+    desc: "Vom Espresso zum Aperitivo. Wir begleiten dich durch den ganzen Tag."
+  }
+];
+---
+
+<section id="vibes" class="py-24 bg-oatmilk overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 animate-on-scroll">
+      <span class="text-sage font-bold uppercase tracking-widest text-xs mb-4 block animate-glow">Das Kausal Erlebnis</span>
+      <h2 class="text-4xl md:text-5xl font-serif font-bold text-espresso mb-6">
+        Alles, was du für die perfekte Pause brauchst.
+      </h2>
+      <div class="w-24 h-1 bg-sage mx-auto"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map(feature => (
+        <div class="group p-8 bg-white border-b-4 border-transparent hover:border-sage transition-all duration-500 shadow-sm hover:shadow-2xl animate-on-scroll">
+          <div class="text-5xl mb-6 transform group-hover:scale-125 transition-transform duration-300">
+            {feature.icon}
+          </div>
+          <h3 class="text-xl font-bold font-sans text-espresso mb-3 uppercase tracking-tight">
+            {feature.title}
+          </h3>
+          <p class="text-espresso/70 font-sans leading-relaxed">
+            {feature.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>

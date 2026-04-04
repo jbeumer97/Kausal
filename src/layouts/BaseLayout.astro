@@ -1,0 +1,80 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+	title = "Kausal Cafe & Bar | Specialty Coffee, Events & Live Musik in Düsseldorf Flingern",
+	description = "Entdecke das Kausal Cafe & Bar in Düsseldorf Flingern. Frischer Kaffee, sonniger Außenbereich, kostenloses WLAN & Live Musik. Auch für Hochzeiten & Privatfeiern buchbar! Täglich 9-22 Uhr."
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://kausal-flingern.de"); // Placeholder domain
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CafeOrCoffeeShop",
+  "name": "Kausal Cafe & Bar",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Flurstraße 1",
+    "addressLocality": "Düsseldorf",
+    "addressRegion": "NRW",
+    "postalCode": "40235",
+    "addressCountry": "DE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 51.233, // Approx Flingern
+    "longitude": 6.812
+  },
+  "url": "https://kausal-flingern.de",
+  "telephone": "+4921192412598",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:00",
+      "closes": "22:00"
+    }
+  ],
+  "servesCuisine": ["Coffee", "Bar", "Snacks"],
+  "priceRange": "$$"
+};
+---
+
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- SEO -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+		<!-- Schema -->
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+	</head>
+	<body class="bg-cream selection:bg-sage/30">
+		<slot />
+	</body>
+</html>

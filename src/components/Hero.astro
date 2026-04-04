@@ -1,0 +1,91 @@
+---
+---
+
+<section id="home" class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+  <!-- Background: Video with Image Fallback -->
+  <div class="absolute inset-0 z-0">
+    <video 
+      autoplay 
+      muted 
+      loop 
+      playsinline 
+      poster="/images/hero.png"
+      class="w-full h-full object-cover animate-soft-fade brightness-[0.7]"
+    >
+      <source src="/videos/6769803-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+      <!-- Fallback image (hero.png) stays visible if video fails or is loading -->
+    </video>
+    <div class="absolute inset-0 bg-gradient-to-r from-espresso/80 via-espresso/30 to-transparent"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
+    <div class="max-w-3xl animate-soft-fade opacity-0 [animation-fill-mode:forwards]">
+      <!-- Secondary Accent Tag -->
+      <div class="inline-block bg-sage text-espresso px-4 py-1 mb-6 text-sm font-bold tracking-widest uppercase shadow-lg">
+        Düsseldorf Flingern
+      </div>
+
+      <!-- H1 Headline -->
+      <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-oatmilk leading-[1.1] mb-6 drop-shadow-2xl">
+        Dein Café & Bar in <span class="text-sage italic">Düsseldorf Flingern</span> | Kausal
+      </h1>
+
+      <!-- Sub-headline -->
+      <p class="text-xl md:text-2xl text-oatmilk/90 font-sans leading-relaxed mb-10 max-w-2xl drop-shadow-lg">
+        Specialty Coffee, hausgemachte Snacks & unvergessliche Events. Genieße deine Auszeit mitten in Düsseldorf.
+      </p>
+
+      <!-- CTA Buttons -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a 
+          href="#contact" 
+          class="bg-sage text-espresso px-10 py-5 text-center font-bold uppercase tracking-widest hover:bg-white transform hover:-translate-y-1 transition-all duration-300 shadow-2xl"
+        >
+          Tisch reservieren
+        </a>
+        <a 
+          href="#vibes" 
+          class="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-10 py-5 text-center font-bold uppercase tracking-widest hover:bg-white hover:text-espresso transition-all duration-300"
+        >
+          Menü ansehen
+        </a>
+      </div>
+
+      <!-- Trust Element -->
+      <div class="mt-12 flex flex-wrap items-center gap-6 text-oatmilk/80 font-semibold tracking-wide text-sm border-t border-white/20 pt-8">
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>Täglich geöffnet 09:00 – 22:00 Uhr</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <span>Flurstraße 1, 40235 Düsseldorf</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block animate-bounce z-10">
+    <a href="#vibes" class="text-oatmilk/60 flex flex-col items-center gap-2 uppercase text-[10px] tracking-[0.4em] font-bold">
+      Scroll
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-soft-fade {
+    animation: fade-in-up 1s ease-out forwards;
+  }
+</style>

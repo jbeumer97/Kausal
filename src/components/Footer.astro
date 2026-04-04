@@ -1,0 +1,76 @@
+---
+const currentYear = new Date().getFullYear();
+const seoTags = [
+  "Café Düsseldorf", "Kaffeerösterei Flingern", "Frühstück Düsseldorf", 
+  "Bar Flingern", "Hochzeitslocation Café", "Live Musik Bar Düsseldorf"
+];
+---
+
+<footer class="bg-espresso pt-20 pb-10 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <!-- Brand & Mission -->
+      <div class="space-y-6">
+        <a href="/" class="text-3xl font-serif font-bold text-oatmilk group">
+          Kausal <span class="text-sage group-hover:text-white transition-colors">.</span>
+        </a>
+        <p class="text-oatmilk/50 font-sans text-sm leading-relaxed max-w-xs">
+          Dein zweites Wohnzimmer im Herzen von Flingern. Specialty Coffee, 
+          hausgemachte Snacks und unvergessliche Events.
+        </p>
+        <div class="flex gap-4">
+          <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-sage transition-all rounded-full group">
+            <svg class="w-5 h-5 text-oatmilk group-hover:text-espresso" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.332 3.608 1.308.975.975 1.245 2.242 1.308 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.063 1.366-.333 2.633-1.308 3.608-.975.975-2.242 1.246-3.608 1.308-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.063-2.633-.333-3.608-1.308-.975-.975-1.245-2.242-1.308-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.332-2.633 1.308-3.608.975-.975 2.242-1.245 3.608-1.308 1.266-.058 1.646-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.058-1.28-.073-1.689-.073-4.948s.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98-1.28-.059-1.689-.073-4.948-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="w-10 h-10 bg-white/5 flex items-center justify-center hover:bg-sage transition-all rounded-full group">
+            <svg class="w-5 h-5 text-oatmilk group-hover:text-espresso" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="space-y-6">
+        <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-oatmilk/40">Menü & Rechtliches</h4>
+        <ul class="space-y-3 text-oatmilk/80 font-sans">
+          <li><a href="#" class="hover:text-sage transition-colors">Unsere Speisekarte (PDF)</a></li>
+          <li><a href="#" class="hover:text-sage transition-colors">Impressum</a></li>
+          <li><a href="#" class="hover:text-sage transition-colors">Datenschutz</a></li>
+          <li><a href="#" class="hover:text-sage transition-colors">AGB</a></li>
+        </ul>
+      </div>
+
+      <!-- Details -->
+      <div class="space-y-6">
+        <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-oatmilk/40">Inhaber</h4>
+        <p class="text-oatmilk/80 font-sans leading-relaxed">
+          Babak Mehdioun<br />
+          Kausal Cafe & Bar<br />
+          Düsseldorf Flingern
+        </p>
+      </div>
+
+      <!-- Local SEO & Tags -->
+      <div class="space-y-6">
+        <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-oatmilk/40">Lokale SEO Tags</h4>
+        <div class="flex flex-wrap gap-2 text-[10px] uppercase font-bold tracking-widest">
+          {seoTags.map(tag => (
+            <span class="bg-white/5 px-3 py-1 text-oatmilk/60 border border-white/10 hover:border-sage/50 transition-colors cursor-default">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="border-t border-white/10 pt-10 text-center">
+      <p class="text-oatmilk/30 font-sans text-xs uppercase tracking-widest">
+        &copy; {currentYear} Kausal Cafe & Bar. Alle Rechte vorbehalten. 
+        <span class="mx-2 text-sage/30">|</span> 
+        Made with ❤️ in Flingern
+      </p>
+    </div>
+  </div>
+</footer>

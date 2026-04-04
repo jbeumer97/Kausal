@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+  /* Coffee Palette */
+  --color-espresso: #2D1B13;
+  --color-oatmilk: #F5E6D3;
+  --color-sage: #8BA888;
+  --color-matte-black: #1A1A1A;
+  --color-cream: #FFFBF5;
+  
+  /* Typography */
+  --font-sans: "Montserrat", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --font-accent: "Playfair Display", serif; /* Or a handwritten script if I use a Google Font later */
+
+  /* Spacing & Transitions */
+  --animate-soft-fade: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-espresso antialiased selection:bg-sage selection:text-white font-sans;
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(139, 168, 136, 0.3);
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
