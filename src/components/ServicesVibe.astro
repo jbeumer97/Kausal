@@ -2,77 +2,89 @@
 const features = [
   {
     icon: "☕",
-    title: "Top Café & Takeaway",
-    desc: "Frischer Specialty Coffee, Kuchen & Snacks – zum Genießen hier oder für unterwegs (Essen zum Mitnehmen)."
+    title: "Artisan Roasts",
+    desc: "Vom Espresso zum Pour-over. Wir zelebrieren die Bohne in ihrer edelsten Form.",
+    size: "large"
   },
   {
     icon: "☀️",
-    title: "Sonniger Außenbereich",
-    desc: "Dein Platz an der Sonne im Herzen von Flingern. Perfekt für den Nachmittagskaffee."
-  },
-  {
-    icon: "❄️",
-    title: "Klimatisiert",
-    desc: "Angenehme Temperaturen, auch wenn Düsseldorf schwitzt. Dein kühler Rückzugsort."
+    title: "Urban Terrace",
+    desc: "Dein Logenplatz in Flingern.",
+    size: "small"
   },
   {
     icon: "💻",
-    title: "Kostenloses WLAN",
-    desc: "Dein Co-Working-Space mit dem besten Kaffee der Stadt. Produktivität trifft Genuss."
+    title: "Studio-Vibes",
+    desc: "Co-Working mit dem besten WLAN der Stadt.",
+    size: "medium"
   },
   {
     icon: "🐾",
-    title: "Haustiere willkommen",
-    desc: "Bring deinen Vierbeiner mit – Wassernapf und Leckerli warten schon auf euch!"
-  },
-  {
-    icon: "🍸",
-    title: "Afterwork & Drinks",
-    desc: "Vom Espresso zum Aperitivo. Wir begleiten dich durch den ganzen Tag."
+    title: "Dog Friendly",
+    desc: "Pfotenabdruck erwünscht.",
+    size: "small"
   }
 ];
 ---
 
-<section id="vibes" class="py-24 bg-oatmilk overflow-hidden">
+<section id="vibes" class="py-32 bg-cream overflow-hidden">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16 animate-on-scroll">
-      <span class="text-sage font-bold uppercase tracking-widest text-xs mb-4 block animate-glow">Das Kausal Erlebnis</span>
-      <h2 class="text-4xl md:text-5xl font-serif font-bold text-espresso mb-6">
-        Alles, was du für die perfekte Pause brauchst.
-      </h2>
-      <div class="w-24 h-1 bg-sage mx-auto"></div>
+    <div class="flex flex-col md:flex-row items-end justify-between mb-24 gap-8">
+      <div class="max-w-xl">
+        <span class="text-gold font-serif italic text-xl mb-4 block">The Experience</span>
+        <h2 class="text-5xl md:text-7xl font-serif font-bold text-espresso leading-[0.9]">
+          Alles, was du für die <span class="italic text-gold">perfekte Pause</span> brauchst.
+        </h2>
+      </div>
+      <div class="w-full md:w-1/3">
+        <p class="text-espresso/60 font-sans leading-relaxed border-l border-gold pl-6 py-2">
+          Kausal ist mehr als ein Café – es ist ein Lebensgefühl. Hier trifft Handwerk auf Leidenschaft, mitten im Herzen von Düsseldorf.
+        </p>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {features.map(feature => (
-        <div class="group p-8 bg-white border-b-4 border-transparent hover:border-sage transition-all duration-500 shadow-sm hover:shadow-2xl animate-on-scroll">
-          <div class="text-5xl mb-6 transform group-hover:scale-125 transition-transform duration-300">
-            {feature.icon}
+    <!-- Broken Grid / Asymmetric Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+      {features.map((feature, index) => (
+        <div 
+          class={`gallery-frame group hover:z-20 transition-all duration-700
+            ${feature.size === 'large' ? 'md:col-span-7 md:row-span-2' : ''}
+            ${feature.size === 'medium' ? 'md:col-span-5 md:mt-12' : ''}
+            ${feature.size === 'small' ? 'md:col-span-4' : ''}
+            ${index % 2 === 0 ? 'md:translate-y-12' : ''}
+          `}
+          data-animate
+        >
+          <div class="flex justify-between items-start mb-8">
+            <span class="text-5xl group-hover:scale-110 transition-transform duration-500 block grayscale group-hover:grayscale-0">
+              {feature.icon}
+            </span>
+            <span class="font-mono text-[10px] tracking-widest text-gold opacity-40 group-hover:opacity-100 transition-opacity">
+              0{index + 1} // CAFE
+            </span>
           </div>
-          <h3 class="text-xl font-bold font-sans text-espresso mb-3 uppercase tracking-tight">
+          <h3 class="text-2xl font-serif font-bold text-espresso mb-4 uppercase tracking-tighter">
             {feature.title}
           </h3>
-          <p class="text-espresso/70 font-sans leading-relaxed">
+          <p class="text-espresso/70 font-sans text-sm leading-relaxed max-w-xs mb-8">
             {feature.desc}
           </p>
+          
+          <div class="museum-label">
+            Art-No. {100 + index} // Flingern Selection
+          </div>
+
+          <!-- Abstract Doodle Accent -->
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 opacity-0 group-hover:opacity-10 transition-all duration-700 pointer-events-none">
+            <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" class="text-gold">
+              <path d="M0,50 Q25,0 50,50 T100,50" stroke-width="2" />
+            </svg>
+          </div>
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<style>
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-</style>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
@@ -83,5 +95,5 @@ const features = [
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 </script>

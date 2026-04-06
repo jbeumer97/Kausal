@@ -1,91 +1,87 @@
 ---
 ---
 
-<section id="home" class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
-  <!-- Background: Video with Image Fallback -->
-  <div class="absolute inset-0 z-0">
+<section id="home" class="relative min-h-screen flex items-center pt-24 overflow-hidden bg-espresso">
+  <!-- Full Background Video -->
+  <div class="absolute inset-0 z-0 opacity-0 animate-soft-fade [animation-fill-mode:forwards]">
     <video 
       autoplay 
       muted 
       loop 
       playsinline 
       poster="/images/hero.png"
-      class="w-full h-full object-cover animate-soft-fade brightness-[0.7]"
+      class="w-full h-full object-cover grayscale-[20%] brightness-[0.5]"
     >
       <source src="/videos/6769803-uhd_3840_2160_24fps.mp4" type="video/mp4" />
-      <!-- Fallback image (hero.png) stays visible if video fails or is loading -->
     </video>
-    <div class="absolute inset-0 bg-gradient-to-r from-espresso/80 via-espresso/30 to-transparent"></div>
+    <!-- Dramatic Gradient Overlay for readability -->
+    <div class="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/40 to-transparent pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-espresso/60 via-transparent to-transparent pointer-events-none"></div>
   </div>
 
   <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
-    <div class="max-w-3xl animate-soft-fade opacity-0 [animation-fill-mode:forwards]">
-      <!-- Secondary Accent Tag -->
-      <div class="inline-block bg-sage text-espresso px-4 py-1 mb-6 text-sm font-bold tracking-widest uppercase shadow-lg">
-        Düsseldorf Flingern
+    <div class="max-w-5xl">
+      <!-- Editorial Tag -->
+      <div class="inline-flex items-center gap-4 mb-8 translate-y-4 opacity-0 animate-soft-fade [animation-delay:200ms] [animation-fill-mode:forwards]">
+        <div class="w-12 h-px bg-gold"></div>
+        <span class="text-gold font-serif italic text-xl tracking-wide">Düsseldorf Flingern Concept</span>
       </div>
 
-      <!-- H1 Headline -->
-      <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-oatmilk leading-[1.1] mb-6 drop-shadow-2xl">
-        Dein Café & Bar in <span class="text-sage italic">Düsseldorf Flingern</span> | Kausal
+      <!-- H1 Headline: Dramatic Full-Width Editorial Serif -->
+      <h1 class="text-6xl md:text-8xl lg:text-[11rem] font-serif font-bold text-oatmilk leading-[0.8] mb-12 translate-y-4 opacity-0 animate-soft-fade [animation-delay:400ms] [animation-fill-mode:forwards] drop-shadow-2xl">
+        Kausal<br />
+        <span class="text-gold italic text-[0.8em] font-normal leading-none underline-gold">Cafe & Bar.</span>
       </h1>
 
-      <!-- Sub-headline -->
-      <p class="text-xl md:text-2xl text-oatmilk/90 font-sans leading-relaxed mb-10 max-w-2xl drop-shadow-lg">
-        Specialty Coffee, hausgemachte Snacks & unvergessliche Events. Genieße deine Auszeit mitten in Düsseldorf.
-      </p>
-
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4">
-        <a 
-          href="#contact" 
-          class="bg-sage text-espresso px-10 py-5 text-center font-bold uppercase tracking-widest hover:bg-white transform hover:-translate-y-1 transition-all duration-300 shadow-2xl"
-        >
-          Tisch reservieren
-        </a>
-        <a 
-          href="#vibes" 
-          class="bg-white/10 backdrop-blur-md border-2 border-white/30 text-white px-10 py-5 text-center font-bold uppercase tracking-widest hover:bg-white hover:text-espresso transition-all duration-300"
-        >
-          Menü ansehen
-        </a>
-      </div>
-
-      <!-- Trust Element -->
-      <div class="mt-12 flex flex-wrap items-center gap-6 text-oatmilk/80 font-semibold tracking-wide text-sm border-t border-white/20 pt-8">
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          <span>Täglich geöffnet 09:00 – 22:00 Uhr</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-sage" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
-          <span>Flurstraße 1, 40235 Düsseldorf</span>
+      <div class="flex flex-col lg:flex-row items-end gap-12 translate-y-4 opacity-0 animate-soft-fade [animation-delay:800ms] [animation-fill-mode:forwards]">
+        <p class="max-w-xl text-xl md:text-2xl text-oatmilk/90 font-sans leading-relaxed drop-shadow-lg">
+          Ein eklektischer Rückzugsort für Kunstliebhaber, Kaffeekenner und Nachteulen. Specialty Coffee trifft auf urbane Bar-Kultur im Herzen von Flingern.
+        </p>
+        
+        <!-- CTA: Minimalist but High-End -->
+        <div class="flex flex-col gap-6 w-full lg:w-auto">
+          <a 
+            href="#contact" 
+            class="group relative inline-flex items-center justify-between bg-gold text-espresso px-10 py-6 min-w-[320px] overflow-hidden transition-all duration-500 hover:scale-[1.05] shadow-3xl"
+          >
+            <span class="z-10 font-bold uppercase tracking-[0.3em] text-xs">Tisch reservieren</span>
+            <svg class="z-10 w-6 h-6 transform group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+            </svg>
+            <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+          </a>
+          <a 
+            href="#vibes" 
+            class="text-oatmilk font-serif italic text-xl hover:text-gold transition-colors text-right md:text-left lg:text-right drop-shadow-md"
+          >
+            Unsere Karte entdecken →
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block animate-bounce z-10">
-    <a href="#vibes" class="text-oatmilk/60 flex flex-col items-center gap-2 uppercase text-[10px] tracking-[0.4em] font-bold">
-      Scroll
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7"></path>
-      </svg>
-    </a>
+  <!-- Hand-drawn Doodle Accent -->
+  <div class="absolute bottom-[8%] right-[5%] w-48 h-48 opacity-20 pointer-events-none rotate-12 hidden md:block">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" class="text-gold">
+      <path d="M10,50 Q30,10 50,50 T90,50" stroke-width="1" />
+      <circle cx="50" cy="50" r="35" stroke-width="1" stroke-dasharray="4 4" />
+      <path d="M20,20 L80,80" stroke-width="0.5" opacity="0.5" />
+    </svg>
   </div>
 </section>
 
 <style>
-  @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(30px); }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(50px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .animate-soft-fade {
-    animation: fade-in-up 1s ease-out forwards;
+    animation: fade-up 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+  .underline-gold {
+     text-decoration: underline;
+     text-decoration-color: var(--color-gold);
+     text-underline-offset: 0.15em;
   }
 </style>

@@ -1,37 +1,107 @@
 @import "tailwindcss";
 
 @theme {
-  /* Coffee Palette */
-  --color-espresso: #2D1B13;
-  --color-oatmilk: #F5E6D3;
+  /* Art-Gallery Palette */
+  --color-espresso: #1A1310;
+  --color-oatmilk: #F2EBE1; /* Aged Parchment */
   --color-sage: #8BA888;
-  --color-matte-black: #1A1A1A;
-  --color-cream: #FFFBF5;
+  --color-gold: #C5A059;
+  --color-matte-black: #0E0E0E;
+  --color-cream: #FFFDF9;
   
-  /* Typography */
-  --font-sans: "Montserrat", "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* High-End Editorial Typography */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Playfair Display", serif;
-  --font-accent: "Playfair Display", serif; /* Or a handwritten script if I use a Google Font later */
-
-  /* Spacing & Transitions */
-  --animate-soft-fade: fade-in 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Spacing: Asymmetric & Loose */
+  --spacing-gallery: 15vw;
+  
+  /* Museum Label Typography */
+  --font-mono: "Space Mono", monospace;
 }
 
 @layer base {
   body {
-    @apply bg-cream text-espresso antialiased selection:bg-sage selection:text-white font-sans;
+    @apply bg-cream text-espresso antialiased font-sans transition-colors duration-700 selection:bg-gold/30 selection:text-espresso;
+    position: relative;
+  }
+
+  /* Film Grain Overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('https://grainy-gradients.vercel.app/noise.svg');
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: overlay;
   }
 }
 
-@keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Custom Art-Gallery Styles */
+.broken-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
 }
 
-.text-glow {
-  text-shadow: 0 0 20px rgba(139, 168, 136, 0.3);
+.gallery-card {
+  @apply relative overflow-hidden transition-all duration-700 ease-in-out hover:scale-[1.02];
+  box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
 }
 
-.glass {
-  @apply bg-white/70 backdrop-blur-md border border-white/20;
+.text-underline-gold {
+  position: relative;
+  z-index: 1;
+}
+
+.text-underline-gold::after {
+  content: "";
+  position: absolute;
+  bottom: 0.1em;
+  left: -0.1em;
+  right: -0.1em;
+  height: 0.3em;
+  background: var(--color-sage);
+  z-index: -1;
+  opacity: 0.3;
+  transform: rotate(-1deg);
+}
+
+.gallery-frame {
+  @apply border border-espresso/10 p-4 bg-white relative transition-all duration-700;
+}
+
+.gallery-frame::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid var(--color-gold);
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+
+.gallery-frame:hover::before {
+  opacity: 0.2;
+}
+
+.museum-label {
+  @apply font-mono text-[10px] uppercase tracking-widest text-espresso/40 mt-4 block;
+}
+
+/* Scroll Animations */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0);
 }

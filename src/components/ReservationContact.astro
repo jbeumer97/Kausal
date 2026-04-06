@@ -1,81 +1,94 @@
 ---
 ---
 
-<section id="contact" class="py-24 bg-oatmilk overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-16 animate-on-scroll">
-      <span class="text-sage font-bold uppercase tracking-widest text-xs mb-4 block">Let's Connect</span>
-      <h2 class="text-4xl md:text-5xl font-serif font-bold text-espresso mb-6">
-        Wir freuen uns auf dich!
-      </h2>
-      <div class="w-24 h-1 bg-sage mx-auto"></div>
+<section id="contact" class="py-32 bg-oatmilk overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="flex flex-col lg:flex-row items-end justify-between mb-24 gap-8">
+      <div class="max-w-xl">
+        <span class="text-gold font-serif italic text-xl mb-4 block">Reservation.</span>
+        <h2 class="text-5xl md:text-7xl font-serif font-bold text-espresso leading-[0.9] tracking-tighter">
+          Wir freuen uns auf <br />
+          <span class="italic text-gold underline-gold">dich.</span>
+        </h2>
+      </div>
+      <div class="w-full md:w-1/3">
+        <p class="text-espresso/60 font-sans leading-relaxed border-l border-gold pl-6 py-2">
+           Im Herzen von Flingern. Tisch reservieren, vorbeikommen, den Sound der Stadt genießen. 
+        </p>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-      <!-- Contact & Reservation Details -->
-      <div class="space-y-12 animate-on-scroll">
-        <!-- Reservation Widget Placeholder -->
-        <div class="bg-white p-8 shadow-2xl border-t-8 border-sage">
-          <h3 class="text-2xl font-serif font-bold text-espresso mb-6">Tisch reservieren</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <input type="date" class="bg-cream border-none p-4 font-sans text-sm focus:ring-2 focus:ring-sage" />
-            <input type="time" class="bg-cream border-none p-4 font-sans text-sm focus:ring-2 focus:ring-sage" />
-            <select class="bg-cream border-none p-4 font-sans text-sm focus:ring-2 focus:ring-sage">
-              <option>1 Person</option>
-              <option selected>2 Personen</option>
-              <option>4 Personen</option>
-              <option>6 Personen</option>
-              <option>Größere Gruppe</option>
-            </select>
-            <button class="bg-espresso text-oatmilk font-bold uppercase tracking-widest p-4 hover:bg-sage transition-colors duration-300">
-              Verfügbarkeit prüfen
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start h-full">
+      
+      <!-- Artistic Contact Form / Widget Area -->
+      <div class="lg:col-span-12 xl:col-span-7 bg-white p-12 shadow-3xl gallery-card" data-animate>
+        <h3 class="text-3xl font-serif font-bold text-espresso mb-8 uppercase tracking-[0.2em] border-b border-gold/20 pb-6">
+          Tisch reservieren
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div class="space-y-6">
+            <div class="flex flex-col">
+              <label class="text-xs uppercase tracking-widest text-gold font-bold mb-2">Datum</label>
+              <input type="date" class="bg-cream border-none p-5 font-sans text-lg focus:ring-2 focus:ring-gold" />
+            </div>
+            <div class="flex flex-col">
+              <label class="text-xs uppercase tracking-widest text-gold font-bold mb-2">Personen</label>
+              <select class="bg-cream border-none p-5 font-sans text-lg focus:ring-2 focus:ring-gold">
+                <option>2 Gäste</option>
+                <option>4 Gäste</option>
+                <option>Größere Gruppe</option>
+              </select>
+            </div>
+          </div>
+          <div class="space-y-6">
+            <div class="flex flex-col">
+              <label class="text-xs uppercase tracking-widest text-gold font-bold mb-2">Uhrzeit</label>
+              <input type="time" class="bg-cream border-none p-5 font-sans text-lg focus:ring-2 focus:ring-gold" />
+            </div>
+            <button class="bg-espresso text-oatmilk font-bold uppercase tracking-widest min-h-full p-6 hover:bg-gold transition-colors duration-500 shadow-2xl">
+              Anfrage senden
             </button>
           </div>
-          <p class="text-xs text-espresso/40 italic text-center italic">Integration mit resmio / OpenTable möglich.</p>
         </div>
-
-        <!-- Contact Box -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="space-y-4">
-            <h4 class="text-lg font-bold uppercase tracking-widest text-espresso border-b border-espresso/10 pb-2">Standort</h4>
-            <p class="text-espresso/70 font-sans leading-relaxed">
-              Kausal Cafe & Bar<br />
-              Flurstraße 1<br />
-              40235 Düsseldorf
-            </p>
-            <a href="tel:021192412598" class="block text-espresso font-bold hover:text-sage transition-colors">
-              📞 0211 - 92 41 25 98
-            </a>
-            <a href="mailto:Eteraz2002@yahoo.de" class="block text-espresso/70 hover:text-sage underline underline-offset-4 decoration-sage">
-              Eteraz2002@yahoo.de
-            </a>
-          </div>
-
-          <div class="space-y-4">
-            <h4 class="text-lg font-bold uppercase tracking-widest text-espresso border-b border-espresso/10 pb-2">Öffnungszeiten</h4>
-            <ul class="text-espresso/70 font-sans">
-              <li class="flex justify-between py-1"><span>Montag - Sonntag</span> <span class="font-bold">09:00 – 22:00</span></li>
-              <li class="mt-4 italic text-sm text-sage">Täglich frisch für euch da!</li>
-            </ul>
-          </div>
-        </div>
+        
+        <p class="text-xs text-espresso/40 italic text-center tracking-widest font-bold">Resmio Integration möglich.</p>
       </div>
 
-      <!-- Google Maps Embed -->
-      <div class="w-full h-[500px] shadow-2xl relative group animate-on-scroll">
-        <!-- Overlay to prevent accidental scrolling -->
-        <div class="absolute inset-0 bg-espresso/10 group-hover:bg-transparent transition-colors duration-500 pointer-events-none"></div>
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2499.0494444!2d6.812!3d51.233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8ca0000000000%3A0x0!2sKausal%20Cafe%20%26%20Bar!5e0!3m2!1sde!2sde!4v1234567890" 
-          width="100%" 
-          height="100%" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade"
-          class="filter grayscale hover:grayscale-0 transition-all duration-700"
-        ></iframe>
+      <!-- Compact Details Layer -->
+      <div class="lg:col-span-12 xl:col-span-5 grid grid-cols-1 md:grid-cols-2 gap-12 items-start" data-animate>
+        <div class="space-y-8 bg-espresso p-10 text-oatmilk shadow-2xl rotate-[-2deg]">
+          <h4 class="text-gold font-serif italic text-2xl mb-6 block drop-shadow-lg underline-gold">Details.</h4>
+          <div class="space-y-4">
+             <p class="font-sans leading-relaxed text-lg">
+               Flurstraße 1,<br />
+               40235 Düsseldorf
+             </p>
+             <a href="tel:021192412598" class="block font-bold hover:text-gold transition-colors text-2xl italic font-serif">
+                0211 - 92 41 25 98
+             </a>
+             <a href="mailto:Eteraz2002@yahoo.de" class="block text-oatmilk/70 hover:text-gold transition-colors border-b border-gold/30 pb-2 inline-block">
+               Eteraz2002@yahoo.de
+             </a>
+          </div>
+        </div>
+
+        <div class="space-y-8 bg-white p-10 text-espresso shadow-2xl rotate-[2deg] translate-y-8">
+           <h4 class="text-gold font-serif italic text-2xl mb-6 block drop-shadow-lg underline-gold">Hours.</h4>
+           <div class="space-y-2 font-sans font-bold uppercase tracking-widest text-sm">
+              <p class="flex justify-between"><span>Mo - So</span> <span>09:00 – 22:00</span></p>
+           </div>
+           <p class="text-espresso/60 font-sans italic text-sm mt-8 border-t border-gold/20 pt-4">Täglich frisch für euch da.</p>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- Distant Background Texture -->
+  <div class="absolute inset-0 z-0 opacity-10 pointer-events-none stroke- gold">
+     <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" class="w-full h-full opacity-10">
+        <path d="M0,50 Q100,50 100,50" />
+        <path d="M50,0 Q50,100 50,100" />
+     </svg>
   </div>
 </section>

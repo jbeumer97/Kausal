@@ -1,70 +1,69 @@
 ---
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "Vibes", href: "#vibes" },
-  { name: "Live Musik", href: "#events" },
-  { name: "Feiern", href: "#private" },
-  { name: "Kontakt", href: "#contact" }
+  { name: "The Experience", href: "#vibes" },
+  { name: "Events", href: "#events" },
+  { name: "Celebrations", href: "#private" },
+  { name: "Contact", href: "#contact" }
 ];
 ---
 
-<header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 glass">
-  <nav class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 group">
-      <span class="text-3xl font-serif font-bold text-espresso group-hover:text-sage transition-colors duration-300">
-        Kausal
+<header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 bg-oatmilk/90 backdrop-blur-xl border-b border-gold/10">
+  <nav class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+    <!-- Brand: Editorial Serif -->
+    <a href="/" class="flex flex-col group">
+      <span class="text-4xl font-serif font-bold text-espresso group-hover:text-gold transition-colors duration-500 leading-none">
+        Kausal.
       </span>
-      <span class="text-xs uppercase tracking-[0.2em] font-semibold text-espresso/60 hidden md:block border-l border-espresso/20 pl-3">
-        Cafe & Bar
-      </span>
+      <span class="text-[10px] uppercase tracking-[0.4em] font-bold text-gold/60 mt-1">Düsseldorf Flingern</span>
     </a>
 
-    <!-- Desktop Nav -->
-    <ul class="hidden lg:flex items-center gap-8 font-sans font-semibold text-sm uppercase tracking-wide text-espresso/80">
+    <!-- Desktop Nav: Minimalist & Spaced -->
+    <ul class="hidden lg:flex items-center gap-12 font-sans font-bold text-[10px] uppercase tracking-[0.3em] text-espresso/60">
       {navLinks.map(link => (
         <li>
           <a 
             href={link.href} 
-            class="hover:text-sage border-b-2 border-transparent hover:border-sage transition-all duration-300 pb-1"
+            class="hover:text-gold transition-all duration-500 relative group"
           >
             {link.name}
+            <span class="absolute -bottom-2 left-0 w-0 h-px bg-gold group-hover:w-full transition-all duration-500"></span>
           </a>
         </li>
       ))}
       <li>
         <a 
           href="#contact" 
-          class="bg-espresso text-oatmilk px-6 py-3 rounded-none font-bold uppercase tracking-widest text-xs hover:bg-sage transform hover:-translate-y-1 transition-all duration-300 shadow-xl"
+          class="bg-espresso text-oatmilk px-8 py-4 font-bold uppercase tracking-[0.2em] text-[10px] hover:bg-gold transition-all duration-500 shadow-2xl"
         >
           Tisch reservieren
         </a>
       </li>
     </ul>
 
-    <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="lg:hidden text-espresso p-2 focus:outline-none" aria-label="Menu Toggle">
-      <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+    <!-- Mobile Button -->
+    <button id="mobile-menu-btn" class="lg:hidden text-espresso" aria-label="Menu">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8h16M4 16h16"></path>
       </svg>
     </button>
   </nav>
 
-  <!-- Mobile Menu Sidebar (Hidden by default) -->
-  <div id="mobile-sidebar" class="fixed inset-0 bg-espresso/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center translate-x-full transition-transform duration-500 lg:hidden">
-    <button id="close-sidebar" class="absolute top-8 right-8 text-oatmilk" aria-label="Close Menu">
-      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+  <!-- Gallery-Style Mobile Sidebar -->
+  <div id="mobile-sidebar" class="fixed inset-0 bg-espresso/98 z-50 flex flex-col items-center justify-center translate-x-full transition-transform duration-700 lg:hidden">
+    <button id="close-sidebar" class="absolute top-10 right-10 text-oatmilk" aria-label="Close">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
-    <ul class="flex flex-col items-center gap-8 text-2xl font-serif text-oatmilk italic">
+    <ul class="flex flex-col items-center gap-10 text-3xl font-serif text-oatmilk italic">
       {navLinks.map(link => (
         <li>
-          <a href={link.href} class="hover:text-sage transition-colors close-side-link">{link.name}</a>
+          <a href={link.href} class="hover:text-gold transition-colors close-side-link">{link.name}</a>
         </li>
       ))}
-      <li class="mt-4">
-        <a href="#contact" class="bg-sage text-espresso px-8 py-4 font-bold rounded-none uppercase tracking-widest close-side-link">
+      <li class="mt-8">
+        <a href="#contact" class="bg-gold text-espresso px-10 py-5 font-bold rounded-none uppercase tracking-widest text-sm close-side-link shadow-3xl">
           Tisch reservieren
         </a>
       </li>
@@ -73,29 +72,26 @@ const navLinks = [
 </header>
 
 <script>
-  // Sticky header script
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header?.classList.add('py-1', 'shadow-2xl');
+    if (window.scrollY > 80) {
+      header?.classList.add('py-0', 'shadow-2xl');
     } else {
-      header?.classList.remove('py-1', 'shadow-2xl');
+      header?.classList.remove('py-0', 'shadow-2xl');
     }
   });
 
-  // Mobile sidebar logic
   const menuBtn = document.getElementById('mobile-menu-btn');
   const sidebar = document.getElementById('mobile-sidebar');
   const closeBtn = document.getElementById('close-sidebar');
-  const sideLinks = document.querySelectorAll('.close-side-link');
-
+  
   menuBtn?.addEventListener('click', () => {
-    sidebar?.classList.remove('translate-x-full');
+    sidebar.classList.remove('translate-x-full');
   });
 
-  [closeBtn, ...Array.from(sideLinks)].forEach(el => {
-    el?.addEventListener('click', () => {
-      sidebar?.classList.add('translate-x-full');
+  [closeBtn, ...sidebar.querySelectorAll('.close-side-link')].forEach(el => {
+    el.addEventListener('click', () => {
+      sidebar.classList.add('translate-x-full');
     });
   });
 </script>
