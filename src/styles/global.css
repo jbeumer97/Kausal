@@ -242,24 +242,38 @@
 
 .push-pin {
   position: absolute;
-  top: -10px;
+  top: -18px;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
-  background: radial-gradient(circle at 30% 30%, #ff4d4d, #b30000);
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle at 35% 30%, #555, #1a1a1a);
   border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 -2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.15);
   z-index: 10;
 }
 
+/* Pin shaft/needle below the head */
+.push-pin::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: linear-gradient(to bottom, #444, #222);
+  border-radius: 0 0 2px 2px;
+}
+
+/* Shine highlight on pin head */
 .push-pin::after {
   content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 20%;
+  left: 22%;
   width: 4px;
   height: 4px;
-  background: rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.35);
   border-radius: 50%;
 }
