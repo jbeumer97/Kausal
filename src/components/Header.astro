@@ -1,21 +1,31 @@
 ---
 const navLinks = [
   { name: "Home", href: "#home" },
-  { name: "The Experience", href: "#vibes" },
+  { name: "Konzept", href: "#vibes" },
   { name: "Events", href: "#events" },
-  { name: "Celebrations", href: "#private" },
-  { name: "Contact", href: "#contact" }
+  { name: "Anlässe", href: "#private" },
+  { name: "Kontakt", href: "#contact" }
 ];
 ---
 
 <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-700 bg-oatmilk/90 backdrop-blur-xl border-b border-gold/10">
   <nav class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-    <!-- Brand: Editorial Serif -->
-    <a href="/" class="flex flex-col group">
-      <span class="text-4xl font-serif font-bold text-espresso group-hover:text-gold transition-colors duration-500 leading-none">
-        Kausal.
-      </span>
-      <span class="text-[10px] uppercase tracking-[0.4em] font-bold text-gold/60 mt-1">Düsseldorf Flingern</span>
+    <!-- Brand: Editorial Serif with Rheinturm Icon -->
+    <a href="/" class="flex items-center gap-3 group">
+      <div class="flex flex-col">
+        <span class="text-4xl font-serif font-bold text-espresso group-hover:text-gold transition-colors duration-500 leading-none">
+          Kausal.
+        </span>
+        <span class="text-[10px] uppercase tracking-[0.4em] font-bold text-gold/60 mt-1">Düsseldorf Flingern</span>
+      </div>
+      
+      <!-- Minimalist Rheinturm (TV Tower) SVG -->
+      <svg class="w-6 h-12 text-espresso/40 group-hover:text-gold transition-colors duration-500" viewBox="0 0 40 100" fill="none" stroke="currentColor">
+        <path d="M20 100V25" stroke-width="2" />
+        <path d="M12 25C12 20.5817 15.5817 17 20 17C24.4183 17 28 20.5817 28 25V35C28 39.4183 24.4183 43 20 43C15.5817 43 12 39.4183 12 35V25Z" stroke-width="2" fill="currentColor" fill-opacity="0.1" />
+        <path d="M16 28H24M16 32H24" stroke-width="1" />
+        <path d="M20 17V5" stroke-width="1.5" />
+      </svg>
     </a>
 
     <!-- Desktop Nav: Minimalist & Spaced -->
