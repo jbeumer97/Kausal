@@ -19,35 +19,15 @@ const navLinks = [
         <span class="text-[10px] uppercase tracking-[0.4em] font-bold text-gold/60 mt-1">Düsseldorf Flingern</span>
       </div>
       
-      <!-- Precise Rheinturm Silhouette SVG -->
-      <svg class="w-8 h-16 opacity-30 group-hover:opacity-80 group-hover:text-gold transition-all duration-700" viewBox="0 0 60 150" fill="currentColor" stroke="none">
-        <!-- Thin top antenna -->
-        <rect x="29" y="0" width="2" height="18" rx="1" />
-        
-        <!-- Upper small observation disk (top pod) -->
-        <ellipse cx="30" cy="19" rx="5" ry="2.5" />
-        
-        <!-- Main shaft (upper slender part) -->
-        <path d="M27 21 L26 38 L34 38 L33 21 Z" />
-        
-        <!-- Main observation deck - lower wider disk -->
-        <ellipse cx="30" cy="38" rx="12" ry="4" />
-        
-        <!-- Observation deck body (cylinder) -->
-        <path d="M18 38 L19 48 L41 48 L42 38 Z" />
-        
-        <!-- Deck base ring -->
-        <ellipse cx="30" cy="48" rx="11" ry="3" />
-
-        <!-- Shaft from deck to base (the characteristic chalice/trumpet shape) -->
-        <!-- This curves outward dramatically at the bottom -->
-        <path d="M21 48 
-                 C21 55, 20 65, 19.5 75 
-                 C18 90, 15 108, 10 150 
-                 L50 150 
-                 C45 108, 42 90, 40.5 75 
-                 C40 65, 39 55, 39 48 Z" />
-      </svg>
+      <!-- Precise Rheinturm Icon -->
+      <img 
+        src="/images/rheinturm-icon.png" 
+        alt="Rheinturm Düsseldorf" 
+        class="w-8 h-16 object-contain opacity-30 group-hover:opacity-70 transition-all duration-700 grayscale group-hover:grayscale-0"
+        style="filter: saturate(0) brightness(0.3); transition: filter 0.7s ease, opacity 0.7s ease;"
+        onmouseenter="this.style.filter='saturate(1) brightness(1)'"
+        onmouseleave="this.style.filter='saturate(0) brightness(0.3)'"
+      />
     </a>
 
     <!-- Desktop Nav: Minimalist & Spaced -->
