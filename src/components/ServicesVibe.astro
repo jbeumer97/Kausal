@@ -68,7 +68,7 @@ const features = [
       </div>
 
       <!-- 02: Vinyl & Sound (With Animated Visual) -->
-      <div class="relative group md:mt-48" data-animate>
+      <div id="vinyl-section" class="relative group md:mt-48" data-animate>
         <div class="relative mb-16 aspect-square flex items-center justify-center bg-espresso/5 border border-espresso/10 p-12 overflow-hidden">
           <!-- Animated Vinyl Visual -->
           <div class="relative w-full aspect-square bg-[#0a0a0a] rounded-full shadow-2xl flex items-center justify-center animate-spin-slow overflow-hidden">
@@ -148,7 +148,7 @@ const features = [
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 
   // Audio Interaction Logic
-  const vinylSection = document.querySelector('.group[data-animate]:has(.animate-spin-slow)');
+  const vinylSection = document.getElementById('vinyl-section');
   const jazzAudio = document.getElementById('jazz-audio') as HTMLAudioElement;
   const stylusArm = document.querySelector('.stylus-arm') as HTMLElement;
 
