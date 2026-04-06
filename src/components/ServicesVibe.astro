@@ -27,11 +27,11 @@ const features = [
 ];
 ---
 
-<section id="vibes" class="py-48 bg-cream overflow-hidden">
+<section id="vibes" class="py-24 bg-cream overflow-hidden">
   <div class="max-w-7xl mx-auto px-6">
     
     <!-- Editorial Heading Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32 items-end">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-16 items-end">
       <div class="max-w-xl" data-animate>
         <span class="text-gold font-serif italic text-2xl mb-6 block">Kausal Philosophie.</span>
         <h2 class="text-6xl md:text-9xl font-serif font-bold text-espresso leading-[0.8] tracking-tighter">
@@ -52,11 +52,11 @@ const features = [
     </div>
 
     <!-- The Mosaic Concept Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32 items-start mb-32">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 lg:gap-32 items-start mb-16">
       <!-- 01: Coffee & Cakes -->
       <div class="relative group" data-animate>
         <div class="gallery-frame group-hover:-rotate-1 transition-transform duration-700">
-           <img src="/images/127987488_5262483980435764_1461431410841685995_n.jpg" alt="Artisan Cakes" class="w-full grayscale group-hover:grayscale-0 transition-all duration-1000 h-[600px] object-cover" />
+           <img src="/images/127987488_5262483980435764_1461431410841685995_n.jpg" alt="Artisan Cakes" class="w-full transition-all duration-1000 h-[600px] object-cover" />
         </div>
         <div class="mt-10">
           <h3 class="text-4xl font-serif font-bold text-espresso mb-6 uppercase tracking-tighter">Handwerk & Süßes.</h3>
@@ -75,8 +75,10 @@ const features = [
              <div class="w-full h-full border-[20px] border-[#222] rounded-full opacity-20"></div>
              <div class="absolute inset-[30%] border-[2px] border-white/5 rounded-full"></div>
              <!-- Center Label -->
-             <div class="w-[20%] aspect-square bg-gold rounded-full flex items-center justify-center">
+             <div class="w-[20%] aspect-square bg-gold rounded-full flex items-center justify-center relative">
                 <span class="text-[8px] font-bold text-espresso">KAUSAL</span>
+                <!-- Spindle Hole -->
+                <div class="absolute w-1.5 h-1.5 bg-white/30 rounded-full blur-[0.5px]"></div>
              </div>
           </div>
           <!-- Stylus Arm -->
@@ -145,39 +147,57 @@ const features = [
   const jazzAudio = document.getElementById('jazz-audio') as HTMLAudioElement;
   const stylusArm = document.querySelector('.stylus-arm') as HTMLElement;
 
-  let fadeInterval: number | undefined;
+  const fadeIntervals = new Map<HTMLAudioElement, number>();
 
   const fadeVolume = (audio: HTMLAudioElement, targetVolume: number, duration: number) => {
-    if (fadeInterval) clearInterval(fadeInterval);
+    // Clear existing interval for THIS specific audio element
+    if (fadeIntervals.has(audio)) {
+      clearInterval(fadeIntervals.get(audio));
+      fadeIntervals.delete(audio);
+    }
+
     const step = 0.05;
-    const intervalTime = (duration * step) / Math.abs(targetVolume - audio.volume || 0.1);
+    const intervalTime = 50; // Fixed interval for smoothness
+    const currentVolume = audio.volume;
     
-    fadeInterval = window.setInterval(() => {
-      if (targetVolume > audio.volume) {
-        audio.volume = Math.min(audio.volume + step, targetVolume);
+    const interval = window.setInterval(() => {
+      if (Math.abs(audio.volume - targetVolume) < step) {
+        audio.volume = targetVolume;
+        clearInterval(interval);
+        fadeIntervals.delete(audio);
+        if (targetVolume === 0) {
+          audio.pause();
+          console.log(`[Audio] Paused ${audio.id}`);
+        }
       } else {
-        audio.volume = Math.max(audio.volume - step, targetVolume);
+        if (targetVolume > audio.volume) {
+          audio.volume = Math.min(audio.volume + step, 1);
+        } else {
+          audio.volume = Math.max(audio.volume - step, 0);
+        }
       }
-      
-      if (audio.volume === targetVolume) {
-        clearInterval(fadeInterval);
-        if (targetVolume === 0) audio.pause();
-      }
-    }, 50);
+    }, intervalTime);
+
+    fadeIntervals.set(audio, interval);
   };
 
   if (vinylSection && crackleAudio && jazzAudio && stylusArm) {
     vinylSection.addEventListener('mouseenter', () => {
-      // Browsers require interaction, so we try to play
-      crackleAudio.play().catch(() => console.log('Audio playback blocked - interaction needed'));
-      jazzAudio.play().catch(() => {});
+      console.log('[Audio] Hover detected, attempting play...');
       
+      // Ensure we start from silent
       crackleAudio.volume = 0;
       jazzAudio.volume = 0;
-      
-      fadeVolume(crackleAudio, 0.4, 1000);
-      fadeVolume(jazzAudio, 0.3, 2000); // Jazz blends in later
-      
+
+      const playTracks = () => {
+        crackleAudio.play().catch(e => console.warn('[Audio] Crackle play error:', e));
+        jazzAudio.play().catch(e => console.warn('[Audio] Jazz play error:', e));
+        
+        fadeVolume(crackleAudio, 0.4, 1000);
+        fadeVolume(jazzAudio, 0.3, 2000);
+      };
+
+      playTracks();
       stylusArm.style.transform = 'rotate(0deg)';
     });
 
@@ -189,12 +209,25 @@ const features = [
     });
   }
 
-  // Global "Unlock Audio" for Chrome/Safari
-  document.addEventListener('click', () => {
-    if (crackleAudio && crackleAudio.paused && !vinylSection?.matches(':hover')) {
-       // Just pre-play/pause to unlock
-       crackleAudio.play().then(() => crackleAudio.pause());
-       jazzAudio.play().then(() => jazzAudio.pause());
+  // Robust Audio "Unlock" Listener
+  const unlockAudio = () => {
+    if (crackleAudio && jazzAudio) {
+      console.log('[Audio] Attempting global unlock...');
+      
+      // We play and pause immediately to satisfy the interaction requirement
+      const crackleResult = crackleAudio.play();
+      if (crackleResult !== undefined) {
+        crackleResult.then(() => crackleAudio.pause()).catch(() => {});
+      }
+      
+      const jazzResult = jazzAudio.play();
+      if (jazzResult !== undefined) {
+        jazzResult.then(() => jazzAudio.pause()).catch(() => {});
+      }
     }
-  }, { once: true });
+  };
+
+  document.addEventListener('click', unlockAudio, { once: true });
+  document.addEventListener('keydown', unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
 </script>

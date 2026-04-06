@@ -20,11 +20,21 @@ const navLinks = [
       </div>
       
       <!-- Minimalist Rheinturm (TV Tower) SVG -->
-      <svg class="w-6 h-12 text-espresso/40 group-hover:text-gold transition-colors duration-500" viewBox="0 0 40 100" fill="none" stroke="currentColor">
-        <path d="M20 100V25" stroke-width="2" />
-        <path d="M12 25C12 20.5817 15.5817 17 20 17C24.4183 17 28 20.5817 28 25V35C28 39.4183 24.4183 43 20 43C15.5817 43 12 39.4183 12 35V25Z" stroke-width="2" fill="currentColor" fill-opacity="0.1" />
-        <path d="M16 28H24M16 32H24" stroke-width="1" />
-        <path d="M20 17V5" stroke-width="1.5" />
+      <svg class="w-5 h-12 text-espresso/20 group-hover:text-gold transition-all duration-700" viewBox="0 0 40 100" fill="none" stroke="currentColor">
+        <!-- Mast base (tapered) -->
+        <path d="M18 100L19.5 40H20.5L22 100" fill="currentColor" fill-opacity="0.05" stroke="none" />
+        <path d="M20 100V32" stroke-width="1" stroke-linecap="round" />
+        
+        <!-- Main Pod (The characteristic lens shape) -->
+        <path d="M10 25C10 21 14.4772 18 20 18C25.5228 18 30 21 30 25C30 29 25.5228 32 20 32C14.4772 32 10 29 10 25Z" fill="currentColor" fill-opacity="0.1" stroke-width="1.2" />
+        
+        <!-- Window Rows -->
+        <path d="M11 23.5H29" stroke-width="0.5" stroke-dasharray="1 1" />
+        <path d="M11 26.5H29" stroke-width="0.5" stroke-dasharray="1 1" />
+        
+        <!-- Upper Spire & Antenna -->
+        <path d="M20 18V4" stroke-width="0.8" />
+        <circle cx="20" cy="12" r="1.5" fill="currentColor" />
       </svg>
     </a>
 
