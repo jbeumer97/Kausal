@@ -80,8 +80,12 @@ const features = [
              </div>
           </div>
           <!-- Stylus Arm -->
-          <div class="absolute top-10 right-10 w-24 h-48 border-r-4 border-t-4 border-espresso/20 rounded-tr-3xl rotate-[20deg] origin-top-right"></div>
+          <div class="absolute top-10 right-10 w-24 h-48 border-r-4 border-t-4 border-espresso/20 rounded-tr-3xl transition-transform duration-1000 origin-top-right stylus-arm rotate-[20deg]"></div>
         </div>
+        
+        <!-- Audio Elements -->
+        <audio id="crackle-audio" src="/audio/vinyl-crackle.mp3" loop pre-load="auto"></audio>
+        <audio id="jazz-audio" src="/audio/kausal-jazz.mp3" loop pre-load="auto"></audio>
         
         <div>
           <h3 class="text-4xl font-serif font-bold text-espresso mb-6 uppercase tracking-tighter">Analoge Wärme.</h3>
@@ -134,4 +138,63 @@ const features = [
   }, { threshold: 0.1 });
 
   document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+
+  // Audio Interaction Logic
+  const vinylSection = document.querySelector('.group[data-animate]:has(.animate-spin-slow)');
+  const crackleAudio = document.getElementById('crackle-audio') as HTMLAudioElement;
+  const jazzAudio = document.getElementById('jazz-audio') as HTMLAudioElement;
+  const stylusArm = document.querySelector('.stylus-arm') as HTMLElement;
+
+  let fadeInterval: number | undefined;
+
+  const fadeVolume = (audio: HTMLAudioElement, targetVolume: number, duration: number) => {
+    if (fadeInterval) clearInterval(fadeInterval);
+    const step = 0.05;
+    const intervalTime = (duration * step) / Math.abs(targetVolume - audio.volume || 0.1);
+    
+    fadeInterval = window.setInterval(() => {
+      if (targetVolume > audio.volume) {
+        audio.volume = Math.min(audio.volume + step, targetVolume);
+      } else {
+        audio.volume = Math.max(audio.volume - step, targetVolume);
+      }
+      
+      if (audio.volume === targetVolume) {
+        clearInterval(fadeInterval);
+        if (targetVolume === 0) audio.pause();
+      }
+    }, 50);
+  };
+
+  if (vinylSection && crackleAudio && jazzAudio && stylusArm) {
+    vinylSection.addEventListener('mouseenter', () => {
+      // Browsers require interaction, so we try to play
+      crackleAudio.play().catch(() => console.log('Audio playback blocked - interaction needed'));
+      jazzAudio.play().catch(() => {});
+      
+      crackleAudio.volume = 0;
+      jazzAudio.volume = 0;
+      
+      fadeVolume(crackleAudio, 0.4, 1000);
+      fadeVolume(jazzAudio, 0.3, 2000); // Jazz blends in later
+      
+      stylusArm.style.transform = 'rotate(0deg)';
+    });
+
+    vinylSection.addEventListener('mouseleave', () => {
+      fadeVolume(crackleAudio, 0, 1000);
+      fadeVolume(jazzAudio, 0, 1000);
+      
+      stylusArm.style.transform = 'rotate(20deg)';
+    });
+  }
+
+  // Global "Unlock Audio" for Chrome/Safari
+  document.addEventListener('click', () => {
+    if (crackleAudio && crackleAudio.paused && !vinylSection?.matches(':hover')) {
+       // Just pre-play/pause to unlock
+       crackleAudio.play().then(() => crackleAudio.pause());
+       jazzAudio.play().then(() => jazzAudio.pause());
+    }
+  }, { once: true });
 </script>
