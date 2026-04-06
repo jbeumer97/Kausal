@@ -135,7 +135,7 @@
 }
 
 .btn-luxury {
-  @apply group relative inline-flex items-center gap-6 px-12 py-6 overflow-hidden transition-all duration-700;
+  @apply relative inline-flex items-center gap-6 px-12 py-6 overflow-hidden transition-all duration-700;
   border: 1px solid var(--color-espresso);
 }
 
