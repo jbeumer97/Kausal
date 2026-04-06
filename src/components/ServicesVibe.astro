@@ -94,6 +94,16 @@ const features = [
         
         <!-- Audio Element -->
         <audio id="jazz-audio" src="/audio/tatamusic-jazz-jazz-music-485401.mp3" loop preload="auto"></audio>
+
+        <!-- Mobile: Now Playing indicator (only shown when music is playing) -->
+        <div id="now-playing" class="hidden md:hidden items-center gap-2 mt-4 opacity-0 transition-opacity duration-700" aria-live="polite">
+          <span class="flex gap-[3px] items-end h-4">
+            <span class="w-[3px] rounded-full bg-gold animate-eq-bar" style="animation-delay:0s"></span>
+            <span class="w-[3px] rounded-full bg-gold animate-eq-bar" style="animation-delay:0.15s"></span>
+            <span class="w-[3px] rounded-full bg-gold animate-eq-bar" style="animation-delay:0.3s"></span>
+          </span>
+          <span class="text-xs font-mono uppercase tracking-widest text-espresso/50">Analoge Wärme läuft...</span>
+        </div>
         
         <div>
           <h3 class="text-4xl font-serif font-bold text-espresso mb-6 uppercase tracking-tighter">Analoge Wärme.</h3>
@@ -134,37 +144,47 @@ const features = [
   .animate-spin-slow {
     animation: spin-slow 10s linear infinite;
   }
+
+  /* Mobile EQ bar animation for Now Playing indicator */
+  @keyframes eq-bar {
+    0%, 100% { height: 4px; }
+    50% { height: 14px; }
+  }
+  .animate-eq-bar {
+    animation: eq-bar 0.8s ease-in-out infinite;
+  }
+
+  /* Show now-playing only on mobile when active */
+  #now-playing.is-playing {
+    display: flex;
+    opacity: 1;
+  }
 </style>
 
 <script>
-  const observer = new IntersectionObserver((entries) => {
+  const animObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.1 });
+  document.querySelectorAll('[data-animate]').forEach(el => animObserver.observe(el));
 
-  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
-
-  // Audio Interaction Logic
+  // --- Audio setup ---
   const vinylSection = document.getElementById('vinyl-section');
   const jazzAudio = document.getElementById('jazz-audio') as HTMLAudioElement;
   const stylusArm = document.querySelector('.stylus-arm') as HTMLElement;
+  const nowPlaying = document.getElementById('now-playing');
 
   let fadeInterval: number | null = null;
+  let audioUnlocked = false;
 
   const fadeVolume = (audio: HTMLAudioElement, targetVolume: number) => {
-    if (fadeInterval !== null) {
-      clearInterval(fadeInterval);
-      fadeInterval = null;
-    }
+    if (fadeInterval !== null) { clearInterval(fadeInterval); fadeInterval = null; }
     const step = 0.04;
     fadeInterval = window.setInterval(() => {
       if (Math.abs(audio.volume - targetVolume) < step) {
         audio.volume = targetVolume;
-        clearInterval(fadeInterval!);
-        fadeInterval = null;
+        clearInterval(fadeInterval!); fadeInterval = null;
         if (targetVolume === 0) audio.pause();
       } else {
         audio.volume = targetVolume > audio.volume
@@ -174,27 +194,55 @@ const features = [
     }, 50);
   };
 
+  const playJazz = () => {
+    if (!audioUnlocked) return;
+    jazzAudio.volume = 0;
+    jazzAudio.play().catch(e => console.warn('[Audio]', e));
+    fadeVolume(jazzAudio, 0.4);
+    stylusArm.style.transform = 'rotate(0deg)';
+    nowPlaying?.classList.add('is-playing');
+  };
+
+  const pauseJazz = () => {
+    fadeVolume(jazzAudio, 0);
+    stylusArm.style.transform = 'rotate(20deg)';
+    nowPlaying?.classList.remove('is-playing');
+  };
+
+  // --- Desktop: hover ---
+  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
+
   if (vinylSection && jazzAudio && stylusArm) {
+    // Desktop hover
     vinylSection.addEventListener('mouseenter', () => {
-      jazzAudio.volume = 0;
-      jazzAudio.play().catch(e => console.warn('[Audio] Jazz play error:', e));
-      fadeVolume(jazzAudio, 0.4);
-      stylusArm.style.transform = 'rotate(0deg)';
+      if (!isTouchDevice()) playJazz();
+    });
+    vinylSection.addEventListener('mouseleave', () => {
+      if (!isTouchDevice()) pauseJazz();
     });
 
-    vinylSection.addEventListener('mouseleave', () => {
-      fadeVolume(jazzAudio, 0);
-      stylusArm.style.transform = 'rotate(20deg)';
-    });
+    // Mobile: scroll-triggered auto-play via IntersectionObserver
+    const mobileAudioObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!isTouchDevice()) return; // desktop handles via hover
+        if (entry.isIntersecting) {
+          playJazz();
+        } else {
+          pauseJazz();
+        }
+      });
+    }, { threshold: 0.5 }); // play when 50% of section is visible
+
+    mobileAudioObserver.observe(vinylSection);
   }
 
-  // Unlock audio on first user interaction
+  // Unlock audio on first user interaction (required by browsers)
   const unlockAudio = () => {
-    if (jazzAudio) {
-      const result = jazzAudio.play();
-      if (result !== undefined) {
-        result.then(() => jazzAudio.pause()).catch(() => {});
-      }
+    if (!jazzAudio) return;
+    audioUnlocked = true;
+    const result = jazzAudio.play();
+    if (result !== undefined) {
+      result.then(() => jazzAudio.pause()).catch(() => {});
     }
   };
 
