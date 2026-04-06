@@ -92,9 +92,8 @@ const features = [
           <div class="absolute top-10 right-10 w-24 h-48 border-r-4 border-t-4 border-espresso/20 rounded-tr-3xl transition-transform duration-1000 origin-top-right stylus-arm rotate-[20deg]"></div>
         </div>
         
-        <!-- Audio Elements -->
-        <audio id="crackle-audio" src="/audio/vinyl-crackle.mp3" loop pre-load="auto"></audio>
-        <audio id="jazz-audio" src="/audio/kausal-jazz.mp3" loop pre-load="auto"></audio>
+        <!-- Audio Element -->
+        <audio id="jazz-audio" src="/audio/tatamusic-jazz-jazz-music-485401.mp3" loop preload="auto"></audio>
         
         <div>
           <h3 class="text-4xl font-serif font-bold text-espresso mb-6 uppercase tracking-tighter">Analoge Wärme.</h3>
@@ -150,86 +149,51 @@ const features = [
 
   // Audio Interaction Logic
   const vinylSection = document.querySelector('.group[data-animate]:has(.animate-spin-slow)');
-  const crackleAudio = document.getElementById('crackle-audio') as HTMLAudioElement;
   const jazzAudio = document.getElementById('jazz-audio') as HTMLAudioElement;
   const stylusArm = document.querySelector('.stylus-arm') as HTMLElement;
 
-  const fadeIntervals = new Map<HTMLAudioElement, number>();
+  let fadeInterval: number | null = null;
 
-  const fadeVolume = (audio: HTMLAudioElement, targetVolume: number, duration: number) => {
-    // Clear existing interval for THIS specific audio element
-    if (fadeIntervals.has(audio)) {
-      clearInterval(fadeIntervals.get(audio));
-      fadeIntervals.delete(audio);
+  const fadeVolume = (audio: HTMLAudioElement, targetVolume: number) => {
+    if (fadeInterval !== null) {
+      clearInterval(fadeInterval);
+      fadeInterval = null;
     }
-
-    const step = 0.05;
-    const intervalTime = 50; // Fixed interval for smoothness
-    const currentVolume = audio.volume;
-    
-    const interval = window.setInterval(() => {
+    const step = 0.04;
+    fadeInterval = window.setInterval(() => {
       if (Math.abs(audio.volume - targetVolume) < step) {
         audio.volume = targetVolume;
-        clearInterval(interval);
-        fadeIntervals.delete(audio);
-        if (targetVolume === 0) {
-          audio.pause();
-          console.log(`[Audio] Paused ${audio.id}`);
-        }
+        clearInterval(fadeInterval!);
+        fadeInterval = null;
+        if (targetVolume === 0) audio.pause();
       } else {
-        if (targetVolume > audio.volume) {
-          audio.volume = Math.min(audio.volume + step, 1);
-        } else {
-          audio.volume = Math.max(audio.volume - step, 0);
-        }
+        audio.volume = targetVolume > audio.volume
+          ? Math.min(audio.volume + step, 1)
+          : Math.max(audio.volume - step, 0);
       }
-    }, intervalTime);
-
-    fadeIntervals.set(audio, interval);
+    }, 50);
   };
 
-  if (vinylSection && crackleAudio && jazzAudio && stylusArm) {
+  if (vinylSection && jazzAudio && stylusArm) {
     vinylSection.addEventListener('mouseenter', () => {
-      console.log('[Audio] Hover detected, attempting play...');
-      
-      // Ensure we start from silent
-      crackleAudio.volume = 0;
       jazzAudio.volume = 0;
-
-      const playTracks = () => {
-        crackleAudio.play().catch(e => console.warn('[Audio] Crackle play error:', e));
-        jazzAudio.play().catch(e => console.warn('[Audio] Jazz play error:', e));
-        
-        fadeVolume(crackleAudio, 0.4, 1000);
-        fadeVolume(jazzAudio, 0.3, 2000);
-      };
-
-      playTracks();
+      jazzAudio.play().catch(e => console.warn('[Audio] Jazz play error:', e));
+      fadeVolume(jazzAudio, 0.4);
       stylusArm.style.transform = 'rotate(0deg)';
     });
 
     vinylSection.addEventListener('mouseleave', () => {
-      fadeVolume(crackleAudio, 0, 1000);
-      fadeVolume(jazzAudio, 0, 1000);
-      
+      fadeVolume(jazzAudio, 0);
       stylusArm.style.transform = 'rotate(20deg)';
     });
   }
 
-  // Robust Audio "Unlock" Listener
+  // Unlock audio on first user interaction
   const unlockAudio = () => {
-    if (crackleAudio && jazzAudio) {
-      console.log('[Audio] Attempting global unlock...');
-      
-      // We play and pause immediately to satisfy the interaction requirement
-      const crackleResult = crackleAudio.play();
-      if (crackleResult !== undefined) {
-        crackleResult.then(() => crackleAudio.pause()).catch(() => {});
-      }
-      
-      const jazzResult = jazzAudio.play();
-      if (jazzResult !== undefined) {
-        jazzResult.then(() => jazzAudio.pause()).catch(() => {});
+    if (jazzAudio) {
+      const result = jazzAudio.play();
+      if (result !== undefined) {
+        result.then(() => jazzAudio.pause()).catch(() => {});
       }
     }
   };
