@@ -33,7 +33,7 @@ const images = [
           `}
           data-speed={img.speed}
         >
-          <div class="gallery-frame overflow-hidden relative">
+          <div class="gallery-frame overflow-hidden relative border border-espresso/5 p-3 bg-white shadow-2xl transition-all duration-1000">
             <img 
               src={img.src} 
               alt={img.theme}
@@ -60,10 +60,8 @@ const images = [
 </section>
 
 <style>
-  @reference "../styles/global.css";
   .gallery-frame {
     aspect-ratio: 4/5;
-    @apply border border-espresso/5 p-3 bg-white shadow-gallery transition-all duration-1000;
   }
   
   .parallax-group {

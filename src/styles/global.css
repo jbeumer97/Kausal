@@ -26,8 +26,17 @@
 
 @layer base {
   body {
-    @apply bg-cream text-espresso antialiased font-sans transition-colors duration-700 selection:bg-gold/30 selection:text-espresso;
+    background-color: var(--color-cream);
+    color: var(--color-espresso);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.7s, color 0.7s;
     position: relative;
+  }
+  body::selection {
+    background-color: rgba(197, 160, 89, 0.3);
+    color: var(--color-espresso);
   }
 
   /* Film Grain Overlay */
@@ -54,8 +63,13 @@
 }
 
 .gallery-card {
-  @apply relative overflow-hidden transition-all duration-700 ease-in-out hover:scale-[1.02];
+  position: relative;
+  overflow: hidden;
+  transition: all 0.7s ease-in-out;
   box-shadow: 20px 20px 60px rgba(0,0,0,0.05);
+}
+.gallery-card:hover {
+  transform: scale(1.02);
 }
 
 .text-underline-gold {
@@ -77,7 +91,11 @@
 }
 
 .gallery-frame {
-  @apply border border-espresso/10 p-4 bg-white relative transition-all duration-700;
+  border: 1px solid rgba(26, 19, 16, 0.1);
+  padding: 1rem;
+  background-color: white;
+  position: relative;
+  transition: all 0.7s;
 }
 
 .gallery-frame::before {
@@ -95,7 +113,13 @@
 }
 
 .museum-label {
-  @apply font-mono text-[10px] uppercase tracking-widest text-espresso/40 mt-4 block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(26, 19, 16, 0.4);
+  margin-top: 1rem;
+  display: block;
 }
 
 /* Scroll Animations */
@@ -117,7 +141,12 @@
 }
 
 .glass-caption {
-  @apply backdrop-blur-md bg-white/10 border border-white/20 p-4 shadow-2xl;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
 .text-mask {
@@ -128,31 +157,49 @@
 }
 
 .light-leak {
-  @apply absolute inset-0 pointer-events-none opacity-30 mix-blend-screen overflow-hidden z-20;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  mix-blend-mode: screen;
+  overflow: hidden;
+  z-index: 20;
   background: radial-gradient(circle at 20% 30%, var(--color-gold) 0%, transparent 50%),
               radial-gradient(circle at 80% 70%, var(--color-sage) 0%, transparent 50%);
   filter: blur(80px);
 }
 
 .btn-luxury {
-  @apply relative inline-flex items-center gap-6 px-12 py-6 overflow-hidden transition-all duration-700;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 3rem;
+  overflow: hidden;
+  transition: all 0.7s;
   border: 1px solid var(--color-espresso);
 }
 
 .btn-luxury:hover {
-  @apply text-oatmilk border-transparent;
+  color: var(--color-oatmilk);
+  border-color: transparent;
 }
 
 .btn-luxury::before {
   content: "";
-  @apply absolute inset-0 bg-espresso translate-y-full transition-transform duration-700 -z-10;
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-espresso);
+  transform: translateY(100%);
+  transition: transform 0.7s;
+  z-index: -10;
 }
 
 .btn-luxury:hover::before {
-  @apply translate-y-0;
+  transform: translateY(0);
 }
 
 /* Scroll-Driven Parallax Helpers */
 .photo-float {
-  @apply transition-transform duration-[2000ms] ease-out;
+  transition: transform 2000ms cubic-bezier(0, 0, 0.2, 1);
 }
