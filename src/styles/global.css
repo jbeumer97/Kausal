@@ -18,6 +18,10 @@
   
   /* Museum Label Typography */
   --font-mono: "Space Mono", monospace;
+
+  /* Expansion: Ultra-Wow Easing */
+  --ease-luxury: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
 }
 
 @layer base {
@@ -104,4 +108,51 @@
 [data-animate].visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ULTRA-WOW: Advanced Layouts & FX */
+.parallax-layer {
+  will-change: transform;
+  transition: transform 0.2s var(--ease-luxury);
+}
+
+.glass-caption {
+  @apply backdrop-blur-md bg-white/10 border border-white/20 p-4 shadow-2xl;
+}
+
+.text-mask {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: inherit; /* To be overridden in component */
+}
+
+.light-leak {
+  @apply absolute inset-0 pointer-events-none opacity-30 mix-blend-screen overflow-hidden z-20;
+  background: radial-gradient(circle at 20% 30%, var(--color-gold) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, var(--color-sage) 0%, transparent 50%);
+  filter: blur(80px);
+}
+
+.btn-luxury {
+  @apply group relative inline-flex items-center gap-6 px-12 py-6 overflow-hidden transition-all duration-700;
+  border: 1px solid var(--color-espresso);
+}
+
+.btn-luxury:hover {
+  @apply text-oatmilk border-transparent;
+}
+
+.btn-luxury::before {
+  content: "";
+  @apply absolute inset-0 bg-espresso translate-y-full transition-transform duration-700 -z-10;
+}
+
+.btn-luxury:hover::before {
+  @apply translate-y-0;
+}
+
+/* Scroll-Driven Parallax Helpers */
+.photo-float {
+  @apply transition-transform duration-[2000ms] ease-out;
 }
