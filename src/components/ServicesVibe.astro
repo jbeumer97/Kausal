@@ -43,15 +43,14 @@ const features = [
       </div>
     </div>
 
-    <!-- Broken Grid / Asymmetric Layout -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+    <!-- Tightened Grid / Asymmetric Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
       {features.map((feature, index) => (
         <div 
           class={`gallery-frame group hover:z-20 transition-all duration-700
             ${feature.size === 'large' ? 'md:col-span-7 md:row-span-2' : ''}
-            ${feature.size === 'medium' ? 'md:col-span-5 md:mt-12' : ''}
+            ${feature.size === 'medium' ? 'md:col-span-5' : ''}
             ${feature.size === 'small' ? 'md:col-span-4' : ''}
-            ${index % 2 === 0 ? 'md:translate-y-12' : ''}
           `}
           data-animate
         >
